@@ -4,8 +4,10 @@ import { useState, useEffect } from "react"
 import { loadStripe } from "@stripe/stripe-js"
 import { Check, Star, Crown, Zap, Users, Shield, MessageCircle, Award } from "lucide-react"
 
+const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 const createCheckoutSession = async (priceId) => {
-  const res = await fetch("http://localhost:8000/create-checkout-session", {
+  const res = await fetch(`${API}/create-checkout-session`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ priceId }),
@@ -23,7 +25,7 @@ export default function VipCard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch("http://localhost:8000/user-info", {
+    fetch(`${API}/user-info`, {
       method: "GET",
       credentials: "include",
     })

@@ -21,31 +21,22 @@ from services.homepage import fetch_user_leagues
 from services.homepage import fetch_user_teams
 from schemas.vip_schema import ConfirmPurchaseSchema
 from services.vip_service import handle_confirm_purchase
-import uvicorn
 import stripe
-from dotenv import load_dotenv
-load_dotenv() 
-
-
- 
-
 
 router = APIRouter()
-api_key = os.environ.get("STRIPE_SECRET_KEY")
-print(api_key)
-stripe.api_key = api_key
+
+# Get frontend URL from environment, default to localhost for dev
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
 @router.post("/create-checkout-session")
 async def create_checkout_session(request: Request):
     data = await request.json()
-    print(data)
 
     checkout_session = stripe.checkout.Session.create(
-        success_url="http://localhost:3000/vip/success?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url="http://localhost:3000/homepage",
+        success_url=f"{FRONTEND_URL}/vip/success?session_id={{CHECKOUT_SESSION_ID}}",
+        cancel_url=f"{FRONTEND_URL}/homepage",
         payment_method_types=["card"],
         mode="subscription",
-
         line_items=[{
             "price": data["priceId"], 
             "quantity": 1
