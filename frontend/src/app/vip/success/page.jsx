@@ -1,8 +1,13 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function SuccessPage() {
+const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
+function SuccessPageContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +23,7 @@ export default function SuccessPage() {
       }
 
       try {
-        const res = await fetch("http://localhost:8000/verify-session", {
+        const res = await fetch(`${API}/verify-session`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ sessionId }),
@@ -28,7 +33,7 @@ export default function SuccessPage() {
 
         if (data.valid) {
           setShowModal(true);
-          await fetch("http://localhost:8000/confirm-purchase", {
+          await fetch(`${API}/confirm-purchase`, {
             method: "POST",
             credentials: 'include',
             headers: { "Content-Type": "application/json" },
@@ -124,5 +129,21 @@ export default function SuccessPage() {
         }
       `}</style>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="relative min-h-screen bg-[#031716] text-white flex flex-col items-center justify-center px-4">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-[#032f30] text-white rounded-3xl shadow-2xl p-6 max-w-md w-full border border-[#6ba3be] text-center">
+            <p className="text-lg font-semibold">Loading...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <SuccessPageContent />
+    </Suspense>
   );
 }
