@@ -4,9 +4,6 @@ import { useSearchParams } from 'next/navigation';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 function SuccessPageContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
