@@ -1,7 +1,7 @@
 "use client"
 
 import { Eye, MapPin, Trophy, Award, Hash, Loader2, UserPlus } from "lucide-react"
-import { API_URL } from "@/lib/api";
+import { API_URL } from "../../lib/api";
 
 export default function AllTeamsGrid({
   allTeams,

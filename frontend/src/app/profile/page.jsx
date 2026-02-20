@@ -6,7 +6,7 @@ import { update_user_profile } from "../../lib/user";
 import UserNavbar from "../../components/user_components/user_navbar/user_navbar";
 import SpiderChart from "../../components/user_components/user_charts/SpiderChart";
 import UserNotification from "../../components/user_components/user_notification/UserNotification";
-import { API_URL } from "@/lib/api";
+import { API_URL } from "../../lib/api";
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);

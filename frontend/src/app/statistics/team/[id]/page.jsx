@@ -39,7 +39,7 @@ import {
   Visibility,
 } from "@mui/icons-material"
 
-import { API_URL as API } from "@/lib/api";
+import { API_URL as API } from "../../../../lib/api";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 

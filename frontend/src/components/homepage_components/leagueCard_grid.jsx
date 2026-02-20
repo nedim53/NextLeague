@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LeagueCard from "./LeagueCard";
 import Link from "next/link";
-import { API_URL } from "@/lib/api";
+import { API_URL } from "../../lib/api";
 
 const LeaguesGrid = () => {
   const [leagues, setLeagues] = useState([]);

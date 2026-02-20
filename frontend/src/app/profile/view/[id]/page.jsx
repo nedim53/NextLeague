@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import UserViewNavbar from "../../../../components/user_components/user_navbar/user_view_navbar";
 import { get_user_profile, get_user_teams, get_team_statistic } from "../../../../lib/user";
-import { API_URL } from "@/lib/api";
+import { API_URL } from "../../../../lib/api";
 
 export default function ProfileViewPage() {
   const params = useParams();

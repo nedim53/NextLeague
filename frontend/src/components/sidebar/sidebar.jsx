@@ -12,7 +12,7 @@ import {
   BarChart,
   LogOut,
 } from "lucide-react";
-import { API_URL } from "@/lib/api";
+import { API_URL } from "../../lib/api";
 
 const Sidebar = ()=> {
 

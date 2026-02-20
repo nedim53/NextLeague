@@ -1,7 +1,7 @@
 "use client"
 
 import { Users, Trophy, MapPin, Star, Target, Trash2, Loader2, Hash, Crown } from "lucide-react"
-import { API_URL } from "@/lib/api";
+import { API_URL } from "../../lib/api";
 
 export default function TeamCardGrid({ teams, currentUser, onViewMembers, onViewTeam, onDeleteTeam, deletingTeams }) {
   return (

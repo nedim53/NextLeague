@@ -22,7 +22,7 @@ import {
   useMediaQuery,
 } from "@mui/material"
 import { SportsSoccer, Groups, EmojiEvents, TrendingUp, Assessment } from "@mui/icons-material"
-import { API_URL } from "@/lib/api";
+import { API_URL } from "../../lib/api";
 
 const PRIMARY_BG = "#031716"
 const SECONDARY_BG = "#032f30"
