@@ -7,7 +7,7 @@ from models.user_model import User
 from datetime import date
 from auth.jwt_utils import create_access_token
 
-def login_user(data, session, response: Response):
+def login_user(data, session):
     user = auth_repository.get_user_by_email(session, data.email)
 
     if not user or user.password != sha256(data.password.encode()).hexdigest():
@@ -21,15 +21,6 @@ def login_user(data, session, response: Response):
     }
 
     token = create_access_token(token_data)
-
-    response.set_cookie(
-        key="access_token",
-        value=token,
-        httponly=True,
-        secure=False,  # stavi True za HTTPS
-        samesite="Lax",
-        max_age=60 * 60 * 24 * 7
-    )
 
     return {"access_token": token}
 
