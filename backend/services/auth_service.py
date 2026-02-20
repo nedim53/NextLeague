@@ -31,7 +31,7 @@ def login_user(data, session, response: Response):
         max_age=60 * 60 * 24 * 7
     )
 
-    return {"message": "Logged in"}
+     return {"access_token": token}
 
 def register_user(data: RegisterRequest, session: Session):
     existing_user = auth_repository.get_user_by_email(session, data.email)
