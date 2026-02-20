@@ -1,65 +1,106 @@
-from fastapi import APIRouter, Response, HTTPException,Request,Body, Depends
-from fastapi.responses import JSONResponse
-from typing import Annotated,List
-from sqlmodel import Session, select
+from fastapi import APIRouter, Response, HTTPException, Request, Depends
+from typing import Annotated, List
+from sqlmodel import Session
+
 from models.user_model import User
 from database.database import engine
-from hashlib import sha256
-from schemas.auth_schema import LoginRequest,RegisterRequest
-from services import user_service,auth_service
-from auth.jwt_utils import decode_access_token  # tvoje JWT dekodiranje
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-# SVA LOGIKA JE U SERVICE FOLDERU, ODAVDE POZIVAMO FUNKCIJU U SERVICE FOLDERU 
-# A IZ SERVICE POZIVAMO DALJE STA NAM TREBA IZ REPOSITORES
-# CONTROLLER <- SERVICE -> REPOSITORIES
+from schemas.auth_schema import LoginRequest, RegisterRequest
+from services import user_service, auth_service
+from auth.jwt_utils import decode_access_token
 
-security = HTTPBearer()
-
-# Dependency za kreiranje sesije
+# -----------------------------------
+# Session dependency
+# -----------------------------------
 def get_session():
     with Session(engine) as session:
         yield session
-SessionDep = Annotated[Session,Depends(get_session)]
+
+SessionDep = Annotated[Session, Depends(get_session)]
 
 router = APIRouter()
 
+
+# -----------------------------------
+# LOGIN
+# -----------------------------------
 @router.post("/login")
-def login_user(data: LoginRequest, response: Response, session: Session = Depends(get_session)):
-    return auth_service.login_user(data, session, response)
+def login_user(
+    data: LoginRequest,
+    response: Response,
+    session: Session = Depends(get_session)
+):
+    """
+    Login user and set JWT as HTTP-only cookie.
+    IMPORTANT: SameSite=None + Secure=True required for cross-site (Render).
+    """
+    result = auth_service.login_user(data, session)
+
+    # Pretpostavljamo da service vraća dict sa tokenom
+    token = result.get("access_token")
+
+    if not token:
+        raise HTTPException(status_code=400, detail="Token not generated")
+
+    response.set_cookie(
+        key="access_token",
+        value=token,
+        httponly=True,
+        secure=True,           # REQUIRED for SameSite=None
+        samesite="none",       # REQUIRED for cross-site cookies
+        path="/"
+    )
+
+    return {"message": "Login successful"}
 
 
+# -----------------------------------
+# REGISTER
+# -----------------------------------
 @router.post("/register")
-def register_user(data: RegisterRequest, session: Session = Depends(get_session)):
+def register_user(
+    data: RegisterRequest,
+    session: Session = Depends(get_session)
+):
     return auth_service.register_user(data, session)
-    
-    # Ruta za dobavljanje svih korisnika
+
+
+# -----------------------------------
+# GET ALL USERS
+# -----------------------------------
 @router.get("/getUsers", response_model=List[User])
 def get_users(session: Session = Depends(get_session)):
     return user_service.get_users(session)
 
+
+# -----------------------------------
+# GET CURRENT USER FROM COOKIE
+# -----------------------------------
 @router.get("/user-data")
 def get_user_data(request: Request):
-    # Dobijanje tokena iz kolačića (pretpostavljamo da se zove 'user_data')
     token = request.cookies.get("access_token")
 
     if not token:
         raise HTTPException(status_code=401, detail="Missing or invalid cookie")
 
     try:
-        # Dekodiranje tokena
         payload = decode_access_token(token)
         return {"user_data": payload}
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid or expired token")
-    
 
+
+# -----------------------------------
+# LOGOUT
+# -----------------------------------
 @router.post("/logout")
 def logout(response: Response):
+    """
+    Delete cookie correctly (must match SameSite + Secure settings).
+    """
     response.delete_cookie(
         key="access_token",
-        httponly=True,
+        path="/",
         secure=True,
-        samesite="lax",
-        path="/"
+        samesite="none"
     )
     return {"message": "Logged out"}
