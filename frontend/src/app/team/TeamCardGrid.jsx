@@ -1,7 +1,7 @@
 "use client"
 
 import { Users, Trophy, MapPin, Star, Target, Trash2, Loader2, Hash, Crown } from "lucide-react"
-import { API_URL } from '../../lib/api';
+import { API_URL } from "@/lib/api";
 
 export default function TeamCardGrid({ teams, currentUser, onViewMembers, onViewTeam, onDeleteTeam, deletingTeams }) {
   return (
@@ -47,8 +47,6 @@ export default function TeamCardGrid({ teams, currentUser, onViewMembers, onView
 
               {team.team_logo && (
                 <div className="w-20 h-20 rounded-2xl flex items-center justify-center ml-4 bg-gradient-to-br from-[#0a7075] to-[#274d60] border-2 border-[#0c969c]/30 shadow-xl group-hover:scale-110 transition-transform duration-300">
-import { API_URL } from '../../lib/api';
-
                   <img
                     src={`${API_URL}/${team.team_logo.replace(/^\/+/, "")}`}
                     alt={`${team.name} logo`}

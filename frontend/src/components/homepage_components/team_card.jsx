@@ -1,5 +1,5 @@
 import { PencilSquareIcon, EyeIcon } from "@heroicons/react/24/outline";
-import { API_URL } from '../../lib/api';
+import { API_URL } from "@/lib/api";
 
 const TeamCard = ({
   teamName,

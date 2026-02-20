@@ -1,7 +1,7 @@
-'use client';
-import { useEffect, useState, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { API_URL as API } from '../../../lib/api';
+"use client";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { API_URL as API } from "@/lib/api";
 
 function SuccessPageContent() {
   const searchParams = useSearchParams();

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Search, User, Users, Trophy, Loader2, ArrowRight } from "lucide-react"
-import { API_URL } from '../../lib/api'
+import { API_URL } from "@/lib/api"
 
 export default function SearchBar() {
   const [query, setQuery] = useState("")

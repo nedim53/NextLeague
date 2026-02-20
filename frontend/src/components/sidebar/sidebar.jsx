@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Menu,
   X,
@@ -12,6 +12,7 @@ import {
   BarChart,
   LogOut,
 } from "lucide-react";
+import { API_URL } from "@/lib/api";
 
 const Sidebar = ()=> {
 
@@ -97,8 +98,6 @@ const Sidebar = ()=> {
 
         {/* Logout Button */}
         <div className="mt-10 pt-6 border-t border-teal-800">
-import { API_URL } from '../../lib/api';
-
           <button
              onClick={async () => {
     try {
