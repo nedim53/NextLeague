@@ -43,10 +43,6 @@ default_origins = [
     "https://nextleague-1.onrender.com",
 ]
 
-extra_origins = [o.strip().rstrip("/") for o in env_origins.split(",") if o.strip()]
-
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
