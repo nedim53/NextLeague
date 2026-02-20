@@ -24,34 +24,27 @@ router = APIRouter()
 # LOGIN
 # -----------------------------------
 @router.post("/login")
-def login_user(
-    data: LoginRequest,
-    response: Response,
-    session: Session = Depends(get_session)
-):
-    """
-    Login user and set JWT as HTTP-only cookie.
-    IMPORTANT: SameSite=None + Secure=True required for cross-site (Render).
-    """
-    result = auth_service.login_user(data, session)
+def login_user(data: LoginRequest, response: Response, session: Session = Depends(get_session)):
+    try:
+        result = auth_service.login_user(data, session)
+        token = result.get("access_token")
+        if not token:
+            raise HTTPException(status_code=400, detail="Token not generated")
 
-    # Pretpostavljamo da service vraća dict sa tokenom
-    token = result.get("access_token")
-
-    if not token:
-        raise HTTPException(status_code=400, detail="Token not generated")
-
-    response.set_cookie(
-        key="access_token",
-        value=token,
-        httponly=True,
-        secure=True,           # REQUIRED for SameSite=None
-        samesite="none",       # REQUIRED for cross-site cookies
-        path="/"
-    )
-
-    return {"message": "Login successful"}
-
+        response.set_cookie(
+            key="access_token",
+            value=token,
+            httponly=True,
+            secure=True,
+            samesite="none",
+            path="/",
+        )
+        return {"message": "Login successful"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        # ovo će ti pokazati pravi uzrok umjesto "Internal Server Error"
+        raise HTTPException(status_code=500, detail=str(e))
 
 # -----------------------------------
 # REGISTER
