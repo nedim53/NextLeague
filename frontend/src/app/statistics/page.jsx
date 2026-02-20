@@ -22,6 +22,7 @@ import {
   useMediaQuery,
 } from "@mui/material"
 import { SportsSoccer, Groups, EmojiEvents, TrendingUp, Assessment } from "@mui/icons-material"
+import { API_URL } from '../../lib/api';
 
 const PRIMARY_BG = "#031716"
 const SECONDARY_BG = "#032f30"
@@ -45,11 +46,11 @@ export default function StatisticsPage() {
     const fetchData = async () => {
       try {
         const [leaguesRes, teamsRes] = await Promise.all([
-          fetch("http://localhost:8000/my-leagues", {
+          fetch(`${API_URL}/my-leagues`, {
             method: "GET",
             credentials: "include",
           }),
-          fetch("http://localhost:8000/my-teams-moderator", {
+          fetch(`${API_URL}/my-teams-moderator`, {
             method: "GET",
             credentials: "include",
           }),

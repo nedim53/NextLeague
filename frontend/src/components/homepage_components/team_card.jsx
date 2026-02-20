@@ -1,4 +1,5 @@
 import { PencilSquareIcon, EyeIcon } from "@heroicons/react/24/outline";
+import { API_URL } from '../../lib/api';
 
 const TeamCard = ({
   teamName,
@@ -22,7 +23,7 @@ const TeamCard = ({
     >
       <div className="flex items-center space-x-4">
         <img
-          src={`http://localhost:8000/${teamImage.replace(/^\/+/, '')}`}
+          src={`${API_URL}/${teamImage.replace(/^\/+/, '')}`}
           alt={`${teamName} logo`}
           style={{
             width: "60px",

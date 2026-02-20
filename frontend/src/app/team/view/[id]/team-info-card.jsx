@@ -1,4 +1,5 @@
 "use client"
+import { API_URL } from '../../../lib/api';
 
 export default function TeamInfoCard({ team }) {
   return (
@@ -20,8 +21,10 @@ export default function TeamInfoCard({ team }) {
                   className="w-full h-full rounded-xl overflow-hidden flex items-center justify-center"
                   style={{ backgroundColor: "#031716" }}
                 >
+import { API_URL } from '../../../lib/api';
+
                   <img
-                    src={`http://localhost:8000/${team.team_logo.replace(/^\/+/, "")}`}
+                    src={`${API_URL}/${team.team_logo.replace(/^\/+/, "")}`}
                     alt={`${team.name} logo`}
                     className="w-16 h-16 object-cover rounded-full border-2 group-hover:scale-110 transition-transform duration-300"
                     style={{ borderColor: "#0c969c" }}

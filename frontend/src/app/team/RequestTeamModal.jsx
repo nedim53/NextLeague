@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react"
 import { getRequestsForTeam } from "../../lib/team"
 import { CheckCircle, XCircle, Users, Crown, Loader2, AlertCircle } from "lucide-react"
-
-const API_URL = "http://localhost:8000"
+import { API_URL } from "../../lib/api"
 
 export default function RequestTeamModal({ onClose }) {
   const [requests, setRequests] = useState([])

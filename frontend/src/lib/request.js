@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000'; // promijeni ako je drugačije
+import { API_URL } from './api';
 
 // POST /request/createRequestForLeague
 export async function createRequestForLeague(body) {

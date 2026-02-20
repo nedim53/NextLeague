@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000'; // promijeni ako je drugačiji tvoj FastAPI backend
+import { API_URL } from './api';
 
 export async function getMyLeagues() {
   try {

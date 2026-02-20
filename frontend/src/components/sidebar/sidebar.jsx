@@ -97,10 +97,12 @@ const Sidebar = ()=> {
 
         {/* Logout Button */}
         <div className="mt-10 pt-6 border-t border-teal-800">
+import { API_URL } from '../../lib/api';
+
           <button
              onClick={async () => {
     try {
-      await fetch('http://localhost:8000/logout', {
+      await fetch(`${API_URL}/logout`, {
         method: 'POST',
         credentials: 'include', // šalje cookie
       });

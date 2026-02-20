@@ -1,8 +1,7 @@
 'use client';
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+import { API_URL as API } from '../../../lib/api';
 
 function SuccessPageContent() {
   const searchParams = useSearchParams();

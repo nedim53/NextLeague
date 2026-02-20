@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react"
 import { loadStripe } from "@stripe/stripe-js"
 import { Check, Star, Crown, Zap, Users, Shield, MessageCircle, Award } from "lucide-react"
-
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+import { API_URL as API } from '../../lib/api';
 
 const createCheckoutSession = async (priceId) => {
   const res = await fetch(`${API}/create-checkout-session`, {

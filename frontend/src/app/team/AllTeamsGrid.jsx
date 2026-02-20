@@ -1,6 +1,7 @@
 "use client"
 
 import { Eye, MapPin, Trophy, Award, Hash, Loader2, UserPlus } from "lucide-react"
+import { API_URL } from '../../lib/api';
 
 export default function AllTeamsGrid({
   allTeams,
@@ -63,8 +64,10 @@ export default function AllTeamsGrid({
 
               {team.team_logo && (
                 <div className="w-20 h-20 rounded-2xl flex items-center justify-center ml-4 bg-gradient-to-br from-[#0a7075] to-[#274d60] border-2 border-[#6ba3be]/30 shadow-xl group-hover:scale-110 transition-transform duration-300">
+import { API_URL } from '../../lib/api';
+
                   <img
-                    src={`http://localhost:8000/${team.team_logo.replace(/^\/+/, "")}`}
+                    src={`${API_URL}/${team.team_logo.replace(/^\/+/, "")}`}
                     alt={`${team.name} logo`}
                     className="w-[60px] h-[60px] object-cover rounded-full border-2 border-white"
                   />

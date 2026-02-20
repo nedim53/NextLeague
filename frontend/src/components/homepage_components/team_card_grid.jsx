@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import TeamCard from './team_card';
 import Link from 'next/link';
+import { API_URL } from '../../lib/api';
+
 const TeamsGrid = () => {
 
   const [TeamModerator, setTeamModerator] = useState([]);
       useEffect(() => {
-      fetch("http://localhost:8000/my-teams-moderator", {
+      fetch(`${API_URL}/my-teams-moderator`, {
         credentials: "include",
       })
         .then((res) => res.json())

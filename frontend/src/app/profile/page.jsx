@@ -6,6 +6,7 @@ import { update_user_profile } from "../../lib/user";
 import UserNavbar from "../../components/user_components/user_navbar/user_navbar";
 import SpiderChart from "../../components/user_components/user_charts/SpiderChart";
 import UserNotification from "../../components/user_components/user_notification/UserNotification";
+import { API_URL } from '../../lib/api';
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -200,7 +201,7 @@ export default function ProfilePage() {
             <div className="bg-[#031716] p-6 rounded-lg border border-[#0c969c]/20 h-full flex flex-col">
               {user.profile_picture ? (
                 <img
-                  src={`http://localhost:8000/${user.profile_picture}`}
+                  src={`${API_URL}/${user.profile_picture}`}
                   alt="Profile"
                   className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
                 />

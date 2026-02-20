@@ -4,12 +4,13 @@ import { TrophyIcon } from '@heroicons/react/24/outline';
 import { UsersIcon } from '@heroicons/react/24/outline';
 import Card from './homepage_card';
 import Link from 'next/link';
+import { API_URL } from '../../lib/api';
 
 const CardsGrid = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-  fetch("http://localhost:8000/user-counts", {
+  fetch(`${API_URL}/user-counts`, {
   method: "GET",
   credentials: "include",
 })

@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:8000';
+import { API_URL } from './api';
+
 export async function get_my_profile() {
   try {
     const response = await fetch(`${API_URL}/user/my_profile`, {
@@ -74,7 +75,7 @@ export const initialUserFormData = {
 };
 
 export async function get_user_teams(userId) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/user/${userId}/teams`, {
+  const res = await fetch(`${API_URL}/user/${userId}/teams`, {
     credentials: 'include',
   });
   if (!res.ok) throw new Error('Failed to fetch user teams');
@@ -82,7 +83,7 @@ export async function get_user_teams(userId) {
 }
 
 export async function get_user_leagues(userId) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/user/${userId}/leagues`, {
+  const res = await fetch(`${API_URL}/user/${userId}/leagues`, {
     credentials: 'include',
   });
   if (!res.ok) throw new Error('Failed to fetch user leagues');
@@ -90,7 +91,7 @@ export async function get_user_leagues(userId) {
 }
 
 export async function get_team_statistic(teamId) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/statistics/team/${teamId}`, {
+  const res = await fetch(`${API_URL}/statistics/team/${teamId}`, {
     credentials: 'include',
   });
   if (!res.ok) throw new Error('Failed to fetch team statistic');

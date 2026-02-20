@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000'; // promijeni ako je drugačiji tvoj FastAPI backend
+import { API_URL } from './api';
 
 //promijeniti ime u auth.js i u ovom folderu lib imat cemo sve odvojene rute kao league.js, team.js
 

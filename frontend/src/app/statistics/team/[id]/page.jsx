@@ -39,9 +39,9 @@ import {
   Visibility,
 } from "@mui/icons-material"
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+import { API_URL as API } from '../../../lib/api';
 
-const API = "http://localhost:8000"
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 const PRIMARY_BG = "#031716"
 const SECONDARY_BG = "#032f30"

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import LeagueCard from './LeagueCard';
 import Link from 'next/link';
+import { API_URL } from '../../lib/api';
 
 const LeaguesGrid = () => {
   const [leagues, setLeagues] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/my-leagues", {
+    fetch(`${API_URL}/my-leagues`, {
       credentials: "include",
     })
       .then((res) => res.json())

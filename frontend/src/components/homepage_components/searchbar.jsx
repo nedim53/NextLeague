@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Search, User, Users, Trophy, Loader2, ArrowRight } from "lucide-react"
+import { API_URL } from '../../lib/api'
 
 export default function SearchBar() {
   const [query, setQuery] = useState("")
@@ -20,7 +21,7 @@ export default function SearchBar() {
     const fetchResults = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`http://localhost:8000/search?query=${encodeURIComponent(query)}`)
+        const response = await fetch(`${API_URL}/search?query=${encodeURIComponent(query)}`)
         if (!response.ok) throw new Error("Failed to fetch")
         const data = await response.json()
 

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import UserViewNavbar from "../../../../components/user_components/user_navbar/user_view_navbar";
 import { get_user_profile, get_user_teams, get_team_statistic } from "../../../../lib/user";
+import { API_URL } from '../../../lib/api';
 
 export default function ProfileViewPage() {
   const params = useParams();
@@ -63,7 +64,7 @@ export default function ProfileViewPage() {
             <div className="bg-[#031716] p-6 rounded-lg border border-[#0c969c]/20 h-full flex flex-col">
               {user.profile_picture ? (
                 <img
-                  src={`http://localhost:8000/${user.profile_picture}`}
+                  src={`${API_URL}/${user.profile_picture}`}
                   alt="Profile"
                   className="w-32 h-32 rounded-full object-cover mx-auto mb-6"
                 />
