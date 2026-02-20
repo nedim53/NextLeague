@@ -32,17 +32,21 @@ if STRIPE_SECRET_KEY:
 # Get frontend URL from environment, default to localhost for dev
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
+# Render frontend URL (deployed Next.js app)
+RENDER_FRONTEND_URL = "https://nextleague-1.onrender.com"
+
 app = FastAPI() 
 
 # Configure CORS
-# Allow frontend URL and localhost for local dev
-allowed_origins = [FRONTEND_URL]
-if FRONTEND_URL != "http://localhost:3000":
-    allowed_origins.append("http://localhost:3000")
+# Allow env-based frontend URL, Render URL and localhost for local dev
+allowed_origins = set()
+allowed_origins.add(FRONTEND_URL.rstrip("/"))
+allowed_origins.add("http://localhost:3000")
+allowed_origins.add(RENDER_FRONTEND_URL.rstrip("/"))
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=list(allowed_origins),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
