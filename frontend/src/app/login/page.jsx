@@ -18,8 +18,8 @@ export default function LoginPage() {
       const data = await loginUser(email, password);
       console.log('Login successful:', data);
 
-      // npr. redirectuj na dashboard ili home
-      location.assign('/homepage');
+      router.push('/homepage');
+      router.refresh();
     } catch (err) {
       setError(err.message);
     }
