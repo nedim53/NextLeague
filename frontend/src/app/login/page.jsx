@@ -18,7 +18,7 @@ export default function LoginPage() {
       const data = await loginUser(email, password);
       console.log('Login successful:', data);
 
-      window.location.href('/homepage');
+      window.location.href='/homepage';
       location.assign('/homepage');
     } catch (err) {
       setError(err.message);
