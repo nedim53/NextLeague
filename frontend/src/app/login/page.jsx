@@ -19,7 +19,7 @@ export default function LoginPage() {
       console.log('Login successful:', data);
 
       window.location.href='/homepage';
-      location.assign('/homepage');
+      
     } catch (err) {
       setError(err.message);
     }
