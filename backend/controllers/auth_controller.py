@@ -37,6 +37,7 @@ def login_user(data: LoginRequest, response: Response, session: Session = Depend
             httponly=True,
             secure=False,
             samesite="none",
+            domain=".onrender.com",
             path="/",
         )
         return {"message": "Login successful"}

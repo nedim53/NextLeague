@@ -2,7 +2,7 @@ import { API_URL } from './api';
 
 export async function get_my_profile() {
   try {
-    const response = await fetch(`${API_URL}/user-info`, {
+    const response = await fetch(`${API_URL}/user/my_profile`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
