@@ -35,7 +35,7 @@ def login_user(data: LoginRequest, response: Response, session: Session = Depend
             key="access_token",
             value=token,
             httponly=True,
-            secure=True,
+            secure=False,
             samesite="none",
             path="/",
         )

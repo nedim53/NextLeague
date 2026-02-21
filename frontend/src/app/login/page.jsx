@@ -19,7 +19,6 @@ export default function LoginPage() {
       console.log('Login successful:', data);
 
       router.push("/homepage");
-      window.location.reload();
     } catch (err) {
       setError(err.message);
     }
